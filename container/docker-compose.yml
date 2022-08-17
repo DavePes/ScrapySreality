@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+        POSTGRES_PASSWORD: 'postgres'
+    ports: ['5432:5432']
+  web:
+    build: ./sreal
+    ports:
+      - 8080:8080
+    links:
+        ['db']
+    environment:
+      POSTGRES_HOST: 'db'
+      POSTGRES_DATABASE: 'postgres'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+#volumes:
+ #   data-htmlon:
+
